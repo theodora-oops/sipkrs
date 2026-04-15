@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard Mahasiswa</title>
+    <title>Mata Kuliah Diampu</title>
 
     <style>
         body {
@@ -14,8 +14,10 @@
         .sidebar {
             width: 220px;
             height: 100vh;
-            background: #1e3a5f;
+            background: #2c3e50;
             position: fixed;
+            top: 0;
+            left: 0;
             padding-top: 20px;
         }
 
@@ -34,7 +36,7 @@
         }
 
         .sidebar a:hover {
-            background: #2c5282;
+            background: #34495e;
         }
 
         /* CONTENT */
@@ -48,35 +50,30 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
         }
 
-        .box-container {
-            display: flex;
-            gap: 15px;
-        }
-
-        .box {
-            flex: 1;
+        .matkul-box {
             background: #4facfe;
             color: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            text-align: center;
+            margin-bottom: 10px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .box a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 6px 10px;
+        .btn {
             background: white;
             color: #4facfe;
+            padding: 6px 10px;
             border-radius: 5px;
             text-decoration: none;
-            font-weight: bold;
+            font-size: 14px;
         }
 
-        .box a:hover {
+        .btn:hover {
             background: #e6f3ff;
         }
     </style>
@@ -86,35 +83,33 @@
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-    <h2>MAHASISWA</h2>
+    <h2>DOSEN</h2>
 
-    <a href="/mahasiswa/dashboard">Dashboard</a>
-    <a href="/mahasiswa/krs">KRS</a>
-    <a href="/mahasiswa/khs">KHS</a>
+    <a href="/dosen/dashboard">Dashboard</a>
+    <a href="/dosen/matkul">Mata Kuliah Diampu</a>
+    <a href="/dosen/kelas/pemrograman-web">Input Nilai</a>
 </div>
 
 <!-- CONTENT -->
 <div class="content">
 
-    <h2>Dashboard Mahasiswa</h2>
+    <h2>Mata Kuliah Diampu</h2>
 
     <div class="card">
-        <h3>Selamat Datang 👋</h3>
-        <p>Ini adalah sistem KRS & KHS mahasiswa.</p>
-    </div>
 
-    <div class="box-container">
-
-        <div class="box">
-            <h3>KRS</h3>
-            <p>Ambil Mata Kuliah</p>
-            <a href="/mahasiswa/krs">Masuk</a>
+        <div class="matkul-box">
+            <span>Pemrograman Web</span>
+            <a class="btn" href="/dosen/kelas/pemrograman-web">Lihat Kelas</a>
         </div>
 
-        <div class="box">
-            <h3>KHS</h3>
-            <p>Lihat Nilai</p>
-            <a href="/mahasiswa/khs">Masuk</a>
+        <div class="matkul-box">
+            <span>Basis Data</span>
+            <a class="btn" href="/dosen/kelas/basis-data">Lihat Kelas</a>
+        </div>
+
+        <div class="matkul-box">
+            <span>Dasar Rekayasa Perangkat Lunak</span>
+            <a class="btn" href="/dosen/kelas/rpl">Lihat Kelas</a>
         </div>
 
     </div>
