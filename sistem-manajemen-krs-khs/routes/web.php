@@ -51,4 +51,26 @@ Route::middleware(['auth','role:mahasiswa'])->group(function () {
 Route::get('/mahasiswa/riwayat-krs', [KrsController::class, 'riwayat']);
 Route::get('/mahasiswa/khs', [KrsController::class, 'khs']);
 
+//admin/matkul
+use App\Http\Controllers\Admin\MatkulController;
+
+Route::prefix('admin')->group(function () {
+    Route::get('/matkul', [MatkulController::class, 'index'])->name('matkul.index');
+    Route::post('/matkul', [MatkulController::class, 'store'])->name('matkul.store');
+    Route::put('/matkul/{id}', [MatkulController::class, 'update'])->name('matkul.update');
+    Route::delete('/matkul/{id}', [MatkulController::class, 'destroy'])->name('matkul.destroy');
+});
+
+//admin/semester
+use App\Http\Controllers\Admin\SemesterController;
+
+Route::prefix('admin')->group(function () {
+
+    Route::get('/semester', [SemesterController::class, 'index'])->name('semester.index');
+    Route::post('/semester', [SemesterController::class, 'store'])->name('semester.store');
+    Route::delete('/semester/{id}', [SemesterController::class, 'destroy'])->name('semester.destroy');
+
+    Route::post('/semester/{id}/activate', [SemesterController::class, 'activate'])->name('semester.activate');
+});
+
 require __DIR__.'/auth.php';
