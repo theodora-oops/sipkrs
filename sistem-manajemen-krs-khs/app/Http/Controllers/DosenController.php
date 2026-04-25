@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Matkul;
+use App\Models\Semester;
+use App\Models\Krs;
 
 class DosenController extends Controller
 {
@@ -11,14 +14,30 @@ class DosenController extends Controller
         return view('dosen.dashboard');
     }
 
-    public function matkul()
+    //  INI UNTUK LIST KELAS DOSEN
+    public function kelas()
     {
-        return view('dosen.matkul');
+        $user = auth()->user();
+
+        $semesterAktif = Semester::where('is_active', 1)->first();
+
+        $matkuls = Matkul::where('dosen_id', $user->id)
+            ->where('semester', $semesterAktif->id ?? null)
+            ->get();
+
+        return view('dosen.kelas', compact('matkuls', 'semesterAktif'));
     }
 
-    public function kelas($matkul)
+    //  INI UNTUK LIST MAHASISWA
+    public function detailKelas($id)
     {
-        return view('dosen.kelas', compact('matkul'));
+        $matkul = Matkul::findOrFail($id);
+
+        $mahasiswas = Krs::where('matkul_id', $id)
+            ->with('mahasiswa')
+            ->get();
+
+        return view('dosen.detail_kelas', compact('matkul', 'mahasiswas'));
     }
 
     public function inputNilai()

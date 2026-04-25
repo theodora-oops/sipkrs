@@ -1,76 +1,31 @@
-@extends('layouts.app')
+@extends('layouts.dosen')
+
+@section('title', 'Dashboard Dosen')
 
 @section('content')
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard Dosen</title>
 
-    <style>
-        body { margin:0; font-family:Arial; background:#f4f6f9; }
-
-        .sidebar {
-            width:220px;
-            height:100vh;
-            background:#2c3e50;
-            position:fixed;
-            padding-top:20px;
-        }
-
-        .sidebar h2 {
-            color:white;
-            text-align:center;
-            margin-bottom:20px;
-        }
-
-        .sidebar a {
-            display:block;
-            color:white;
-            padding:12px;
-            text-decoration:none;
-            padding-left:20px;
-        }
-
-        .sidebar a:hover {
-            background:#34495e;
-        }
-
-        .content {
-            margin-left:220px;
-            padding:20px;
-        }
-
-        .card {
-            background:white;
-            padding:15px;
-            border-radius:10px;
-            margin-bottom:15px;
-            box-shadow:0 2px 8px rgba(0,0,0,0.1);
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="sidebar">
-    <h2>DOSEN</h2>
-
-    <a href="/dosen/dashboard">Dashboard</a>
-    <a href="/dosen/matkul">Mata Kuliah Diampu</a>
-    <a href="/dosen/kelas/pemrograman-web">Kelas / Course</a>
+<div class="mb-6">
+    <h2 class="text-2xl font-bold">
+        Selamat Datang, {{ auth()->user()->name }} 👋
+    </h2>
 </div>
 
-<div class="content">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-    <h2>Dashboard Dosen</h2>
+    <div class="bg-white p-6 rounded-2xl shadow border-l-4 border-blue-500">
+        <h3 class="text-lg font-semibold text-blue-600 mb-2">📚 Kelas Diampu</h3>
+        <p class="text-gray-600 text-sm">
+            Lihat daftar mata kuliah yang Anda ajar pada semester aktif.
+        </p>
+    </div>
 
-    <div class="card">
-        <h3>Selamat Datang Dosen</h3>
-        <p>Silakan pilih menu di sidebar untuk mengelola kelas dan nilai mahasiswa.</p>
+    <div class="bg-white p-6 rounded-2xl shadow border-l-4 border-green-500">
+        <h3 class="text-lg font-semibold text-green-600 mb-2">📝 Input Nilai</h3>
+        <p class="text-gray-600 text-sm">
+            Input nilai mahasiswa untuk setiap kelas yang Anda ajar.
+        </p>
     </div>
 
 </div>
 
-</body>
-</html>
 @endsection

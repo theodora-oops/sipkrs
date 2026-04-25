@@ -17,12 +17,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware('auth');
+//admin
+use App\Http\Controllers\AdminController;
+
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
+    ->middleware('auth');
+
 
 use App\Http\Controllers\UserController;
-//admin
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/pengguna', [UserController::class, 'index'])->name('pengguna.index');
@@ -31,25 +33,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/pengguna/{id}', [UserController::class, 'destroy'])->name('pengguna.destroy');
 
 });
-
-//dosen
-    Route::get('/dosen/dashboard', function () {
-        return view('dosen.dashboard');
-    });
-
-//mhs
-    Route::get('/mahasiswa/dashboard', function () {
-        return view('mahasiswa.dashboard');
-    });
-
-use App\Http\Controllers\KrsController;
-
-Route::middleware(['auth','role:mahasiswa'])->group(function () {
-    Route::get('/mahasiswa/krs', [KrsController::class, 'index']);
-    Route::post('/mahasiswa/krs', [KrsController::class, 'store']);
-});
-Route::get('/mahasiswa/riwayat-krs', [KrsController::class, 'riwayat']);
-Route::get('/mahasiswa/khs', [KrsController::class, 'khs']);
 
 //admin/matkul
 use App\Http\Controllers\Admin\MatkulController;
@@ -72,5 +55,34 @@ Route::prefix('admin')->group(function () {
 
     Route::post('/semester/{id}/activate', [SemesterController::class, 'activate'])->name('semester.activate');
 });
+
+
+//dosen
+use App\Http\Controllers\DosenController;
+
+Route::middleware(['auth','role:dosen'])
+    ->prefix('dosen')
+    ->group(function () {
+
+    Route::get('/dashboard', [DosenController::class, 'dashboard']);
+    Route::get('/kelas', [DosenController::class, 'kelas']);
+    Route::get('/kelas/{id}', [DosenController::class, 'detailKelas']);
+
+});
+
+//mhs
+    Route::get('/mahasiswa/dashboard', function () {
+        return view('mahasiswa.dashboard');
+    });
+
+use App\Http\Controllers\KrsController;
+
+Route::middleware(['auth','role:mahasiswa'])->group(function () {
+    Route::get('/mahasiswa/krs', [KrsController::class, 'index']);
+    Route::post('/mahasiswa/krs', [KrsController::class, 'store']);
+});
+Route::get('/mahasiswa/riwayat-krs', [KrsController::class, 'riwayat']);
+Route::get('/mahasiswa/khs', [KrsController::class, 'khs']);
+
 
 require __DIR__.'/auth.php';

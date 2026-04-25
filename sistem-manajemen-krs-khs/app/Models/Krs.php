@@ -12,4 +12,9 @@ class Krs extends Model
     {
         return $this->belongsTo(\App\Models\Matkul::class);
     }
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

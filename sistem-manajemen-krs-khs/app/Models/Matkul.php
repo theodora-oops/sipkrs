@@ -12,4 +12,9 @@ class Matkul extends Model
         'sks',
         'semester'
     ];
+
+    public function dosen()
+    {
+        return $this->belongsTo(User::class, 'dosen_id');
+    }
 }
