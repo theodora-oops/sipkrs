@@ -14,7 +14,8 @@ class SemesterController extends Controller
     public function index()
     {
         $semesters = Semester::latest()->get();
-        return view('admin.semester.index', compact('semesters'));
+
+        return view('pages.admin.semester.index', compact('semesters'));
     }
 
     // =========================

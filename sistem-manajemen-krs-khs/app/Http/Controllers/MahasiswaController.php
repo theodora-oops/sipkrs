@@ -8,16 +8,16 @@ class MahasiswaController extends Controller
 {
         public function dashboard()
     {
-        return view('mahasiswa.dashboard');
+        return view('pages.mahasiswa.dashboard');
     }
 
     public function krs()
     {
-        return view('mahasiswa.krs');
+        return view('pages.mahasiswa.krs');
     }
 
     public function khs()
     {
-        return view('mahasiswa.khs');
+        return view('pages.mahasiswa.khs');
     }
 }

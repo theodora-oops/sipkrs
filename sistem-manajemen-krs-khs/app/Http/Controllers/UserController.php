@@ -20,7 +20,7 @@ class UserController extends Controller
 
         $users = $users->latest()->get();
 
-        return view('admin.pengguna.index', compact('users', 'role'));
+        return view('pages.admin.pengguna.index', compact('users', 'role'));
     }
 
     public function store(Request $request)

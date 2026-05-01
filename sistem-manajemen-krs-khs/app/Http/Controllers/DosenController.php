@@ -12,7 +12,7 @@ class DosenController extends Controller
 {
     public function dashboard()
     {
-        return view('dosen.dashboard');
+        return view('pages.dosen.dashboard');
     }
 
     //  INI UNTUK LIST KELAS DOSEN
@@ -22,11 +22,11 @@ class DosenController extends Controller
 
         $semesterAktif = Semester::where('is_active', 1)->first();
 
-        $matkuls = Matkul::where('dosen_id', $user->id)
+        $kelas = Matkul::where('dosen_id', $user->id)
             ->where('semester', $semesterAktif->id ?? null)
             ->get();
 
-        return view('dosen.kelas', compact('matkuls', 'semesterAktif'));
+        return view('pages.dosen.kelas', compact('kelas', 'semesterAktif'));
     }
 
     //  INI UNTUK LIST MAHASISWA
@@ -38,11 +38,11 @@ class DosenController extends Controller
             ->with('mahasiswa')
             ->get();
 
-        return view('dosen.detail_kelas', compact('matkul', 'mahasiswas'));
+        return view('pages.dosen.detail_kelas', compact('matkul', 'mahasiswas'));
     }
 
     public function inputNilai()
     {
-        return view('dosen.input_nilai');
+        return view('pages.dosen.input_nilai');
     }
 }

@@ -17,7 +17,7 @@ class AdminController extends Controller
         
         $semesterAktif = Semester::where('is_active', 1)->first();
         
-        return view('admin.dashboard', compact(
+        return view('pages.admin.dashboard', compact(
             'jumlahMahasiswa',
             'jumlahDosen',
             'jumlahMatkul',
@@ -27,21 +27,21 @@ class AdminController extends Controller
 
     public function dosen()
     {
-        return view('admin.dosen');
+        return view('pages.admin.dosen');
     }
 
     public function mahasiswa()
     {
-        return view('admin.mahasiswa');
+        return view('pages.admin.mahasiswa');
     }
 
     public function matkul()
     {
-        return view('admin.matkul');
+        return view('pages.admin.matkul');
     }
     
-     public function semester()
+    public function semester()
     {
-        return view('admin.semester');
+        return view('pages.admin.semester');
     }
 }

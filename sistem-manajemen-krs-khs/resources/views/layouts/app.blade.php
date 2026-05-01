@@ -9,64 +9,72 @@
 </head>
 
 <body class="bg-gray-100 font-sans">
-    <div class="flex">
 
-        <!-- SIDEBAR -->
-        <aside class="w-64 bg-slate-800 text-white min-h-screen p-5">
-            <h2 class="text-2xl font-bold mb-8 text-center">SIP.KRS</h2>
+<div class="flex min-h-screen">
 
-            <nav class="space-y-2">
-                <a href="/admin/dashboard"
-                    class="block px-4 py-2 rounded {{ request()->is('admin/dashboard') ? 'bg-slate-700' : 'hover:bg-slate-700' }}">
-                    Dashboard
-                </a>
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-slate-900 text-gray-200 p-5 flex flex-col">
 
-                <a href="/admin/pengguna"
-                    class="block px-4 py-2 rounded {{ request()->is('admin/pengguna*') ? 'bg-slate-700' : 'hover:bg-slate-700' }}">
-                    Kelola Pengguna
-                </a>
+        <!-- LOGO -->
+        <h2 class="text-2xl font-bold mb-10 text-center tracking-wide text-white">
+            SIP.KRS
+        </h2>
 
-                <a href="/admin/matkul"
-                    class="block px-4 py-2 rounded {{ request()->is('admin/matkul*') ? 'bg-slate-700' : 'hover:bg-slate-700' }}">
-                    Kelola Matkul
-                </a>
+        <!-- MENU -->
+        <nav class="space-y-2 flex-1">
 
-                <a href="/admin/semester"
-                    class="block px-4 py-2 rounded {{ request()->is('admin/semester*') ? 'bg-slate-700' : 'hover:bg-slate-700' }}">
-                    Kelola Semester
-                </a>
-            </nav>
-        </aside>
+            <!-- Dashboard -->
+            <a href="/admin/dashboard"
+                class="flex items-center gap-3 px-4 py-2 rounded-lg transition
+                {{ request()->is('admin/dashboard') ? 'bg-slate-700 text-white' : 'hover:bg-slate-800' }}">
 
-        <!-- MAIN -->
-        <div class="flex-1">
+                <span>Dashboard</span>
+            </a>
 
-            <!-- NAVBAR -->
-            <header class="bg-white shadow px-6 py-4 flex justify-between items-center">
-                <h1 class="text-xl font-semibold">@yield('title')</h1>
+            <!-- Pengguna -->
+            <a href="/admin/pengguna"
+                class="flex items-center gap-3 px-4 py-2 rounded-lg transition
+                {{ request()->is('admin/pengguna*') ? 'bg-slate-700 text-white' : 'hover:bg-slate-800' }}">
+                <span>Kelola Pengguna</span>
+            </a>
 
-                <div class="flex items-center gap-4">
-                    <div class="text-right">
-                        <p class="font-medium">{{ auth()->user()->name }}</p>
-                        <p class="text-sm text-gray-500">{{ auth()->user()->email }}</p>
-                    </div>
+            <!-- Matkul -->
+            <a href="/admin/matkul"
+                class="flex items-center gap-3 px-4 py-2 rounded-lg transition
+                {{ request()->is('admin/matkul*') ? 'bg-slate-700 text-white' : 'hover:bg-slate-800' }}">
+                <span>Kelola Matkul</span>
+            </a>
 
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
-                            Logout
-                        </button>
-                    </form>
-                </div>
-            </header>
+            <!-- Semester -->
+            <a href="/admin/semester"
+                class="flex items-center gap-3 px-4 py-2 rounded-lg transition
+                {{ request()->is('admin/semester*') ? 'bg-slate-700 text-white' : 'hover:bg-slate-800' }}">
+                <span>Kelola Semester</span>
+            </a>
 
-            <!-- CONTENT -->
-            <main class="p-6">
-                @yield('content')
-            </main>
+        </nav>
 
+        <!-- FOOTER -->
+        <div class="text-sm text-gray-400 text-center mt-6">
+            © {{ date('Y') }} SIP.KRS
         </div>
-    </div>
-</body>
 
+    </aside>
+
+    <!-- MAIN -->
+    <div class="flex-1 flex flex-col">
+
+        <!-- NAVBAR COMPONENT -->
+        <x-navbar :title="View::yieldContent('title')" />
+
+        <!-- CONTENT -->
+        <main class="p-6">
+            @yield('content')
+        </main>
+
+    </div>
+
+</div>
+
+</body>
 </html>

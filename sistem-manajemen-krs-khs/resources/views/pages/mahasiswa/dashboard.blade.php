@@ -2,8 +2,8 @@
 @section('title', 'Dashboard Mahasiswa')
 @section('content')
 
-<div class="bg-white p-4 rounded shadow mb-5 text-2xl font-bold">👋
-    Selamat datang, {{ auth()->user()->name }}
+<div class="mb-5 text-2xl font-bold">
+    Selamat datang, {{ auth()->user()->name }} 👋
 </div>
 
 <div class="grid grid-cols-2 gap-4">

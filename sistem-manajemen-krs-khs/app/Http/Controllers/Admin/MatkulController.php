@@ -26,7 +26,7 @@ class MatkulController extends Controller
             ->orderByRaw('CAST(REGEXP_SUBSTR(kode_mk, "[0-9]+") AS UNSIGNED)')
             ->get();
 
-        return view('admin.matkul.index', compact('matkuls', 'semester'));
+        return view('pages.admin.matkul.index', compact('matkuls', 'semester'));
     }
 
     // =========================

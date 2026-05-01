@@ -3,38 +3,40 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// ================= DEFAULT =================
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+// ================= DASHBOARD =================
+Route::get('/dashboard', function () {  
+    return view('pages.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// ================= PROFILE =================
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//admin
+// ================= ADMIN =================
 use App\Http\Controllers\AdminController;
 
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
     ->middleware('auth');
 
-
+// ================= USER =================
 use App\Http\Controllers\UserController;
-Route::middleware(['auth'])->group(function () {
 
+Route::middleware(['auth'])->group(function () {
     Route::get('/admin/pengguna', [UserController::class, 'index'])->name('pengguna.index');
     Route::post('/admin/pengguna', [UserController::class, 'store'])->name('pengguna.store');
     Route::put('/admin/pengguna/{id}', [UserController::class, 'update'])->name('pengguna.update');
     Route::delete('/admin/pengguna/{id}', [UserController::class, 'destroy'])->name('pengguna.destroy');
-
 });
 
-//admin/matkul
+// ================= MATKUL =================
 use App\Http\Controllers\Admin\MatkulController;
 
 Route::prefix('admin')->group(function () {
@@ -44,36 +46,31 @@ Route::prefix('admin')->group(function () {
     Route::delete('/matkul/{id}', [MatkulController::class, 'destroy'])->name('matkul.destroy');
 });
 
-//admin/semester
+// ================= SEMESTER =================
 use App\Http\Controllers\Admin\SemesterController;
 
 Route::prefix('admin')->group(function () {
-
     Route::get('/semester', [SemesterController::class, 'index'])->name('semester.index');
     Route::post('/semester', [SemesterController::class, 'store'])->name('semester.store');
     Route::delete('/semester/{id}', [SemesterController::class, 'destroy'])->name('semester.destroy');
-
     Route::post('/semester/{id}/activate', [SemesterController::class, 'activate'])->name('semester.activate');
 });
 
-
-//dosen
+// ================= DOSEN =================
 use App\Http\Controllers\DosenController;
 
 Route::middleware(['auth','role:dosen'])
     ->prefix('dosen')
     ->group(function () {
-
-    Route::get('/dashboard', [DosenController::class, 'dashboard']);
-    Route::get('/kelas', [DosenController::class, 'kelas']);
-    Route::get('/kelas/{id}', [DosenController::class, 'detailKelas']);
-
+        Route::get('/dashboard', [DosenController::class, 'dashboard']);
+        Route::get('/kelas', [DosenController::class, 'kelas']);
+        Route::get('/kelas/{id}', [DosenController::class, 'detailKelas']);
 });
 
-//mhs
-    Route::get('/mahasiswa/dashboard', function () {
-        return view('mahasiswa.dashboard');
-    });
+// ================= MAHASISWA =================
+Route::get('/mahasiswa/dashboard', function () {
+    return view('pages.mahasiswa.dashboard');
+});
 
 use App\Http\Controllers\KrsController;
 
@@ -81,8 +78,54 @@ Route::middleware(['auth','role:mahasiswa'])->group(function () {
     Route::get('/mahasiswa/krs', [KrsController::class, 'index']);
     Route::post('/mahasiswa/krs', [KrsController::class, 'store']);
 });
+
 Route::get('/mahasiswa/riwayat-krs', [KrsController::class, 'riwayat']);
 Route::get('/mahasiswa/khs', [KrsController::class, 'khs']);
 
 
+// ================= PRAKTIKUM 6 =================
+
+// PRODUCT 
+use App\Http\Controllers\ProductController;
+Route::get('/product', [ProductController::class, 'index']);
+
+
+// ================= PAGES  =================
+Route::prefix('pages')->group(function () {
+
+    Route::get('/home', function () {
+        return view('pages.home', [
+            'nama' => 'Yohana',
+            'pekerjaan' => 'Mahasiswa',
+        ]);
+    });
+
+    Route::get('/about', function () {
+        return view('pages.about');
+    });
+
+    Route::get('/contact', function () {
+        return view('pages.contact');
+    });
+
+    Route::get('/product', function () {
+        return view('pages.product');
+    });
+
+    Route::get('/login', function () {
+        return view('auth.login');
+    });
+
+    Route::get('/register', function () {
+        return view('auth.register');
+    });
+
+    Route::get('/dashboard', function () {
+        return view('auth.dashboard');
+    });
+
+});
+
+
+// ================= AUTH =================
 require __DIR__.'/auth.php';

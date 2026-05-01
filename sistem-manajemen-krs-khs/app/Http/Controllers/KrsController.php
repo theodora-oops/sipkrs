@@ -22,10 +22,10 @@ class KrsController extends Controller
                   ->pluck('matkul_id')
                   ->toArray();
 
-        // semester aktif (dari database)
-        $currentSemester = 3;
+        // semester aktif 
+        $currentSemester = 2;
 
-        return view('mahasiswa.krs', compact(
+        return view('pages.mahasiswa.krs', compact(
             'matkuls',
             'semester',
             'krs',
@@ -48,7 +48,7 @@ class KrsController extends Controller
         foreach ($request->matkuls as $matkul_id) {
             Krs::create([
                 'user_id' => $userId,
-                'matkul_id' => $matkul_id
+                'matkul_id' => $matkul_id,
             ]);
         }
 
@@ -67,7 +67,7 @@ class KrsController extends Controller
                 return $item->matkul->semester;
             });
 
-    return view('mahasiswa.riwayat-krs', compact('krs'));
+    return view('pages.mahasiswa.riwayat-krs', compact('krs'));
     }
 
     public function khs()
@@ -120,7 +120,7 @@ class KrsController extends Controller
         
         $ipk = $totalSksAll ? round($ipkTotal / $totalSksAll, 2) : 0;
         
-        return view('mahasiswa.khs', compact('hasil', 'ipk'));
+        return view('pages.mahasiswa.khs', compact('hasil', 'ipk'));
         
     }
 }

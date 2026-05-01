@@ -12,10 +12,13 @@
     <div class="flex">
 
         <!-- SIDEBAR -->
-        <aside class="w-64 bg-slate-800 text-white min-h-screen p-5">
+        <aside class="w-64 bg-slate-800 text-white min-h-screen p-5 flex flex-col">
+
+            <!-- LOGO -->
             <h2 class="text-2xl font-bold mb-8 text-center">SIP.KRS</h2>
 
-            <nav class="space-y-2">
+            <!-- MENU -->
+            <nav class="space-y-2 flex-1">
                 <a href="/dosen/dashboard"
                     class="block px-4 py-2 rounded {{ request()->is('dosen/dashboard') ? 'bg-slate-700' : 'hover:bg-slate-700' }}">
                     Dashboard
@@ -26,10 +29,17 @@
                     Kelas Diampu
                 </a>
 
-                <a href="#" class="block px-4 py-2 rounded hover:bg-slate-700">
+                <a href="/dosen/nilai"
+                    class="block px-4 py-2 rounded {{ request()->is('dosen/nilai*') ? 'bg-slate-700' : 'hover:bg-slate-700' }}">
                     Input Nilai
                 </a>
             </nav>
+
+            <!-- FOOTER -->
+            <div class="text-sm text-gray-400 text-center">
+                © {{ date('Y') }} SIP.KRS
+            </div>
+
         </aside>
 
         <!-- MAIN -->
@@ -53,8 +63,13 @@
                     <!-- LOGOUT -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
-                            Logout
+                        <button class="p-2 rounded-full hover:bg-red-100 transition">
+
+                            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h5a2 2 0 012 2v1" />
+                            </svg>
+
                         </button>
                     </form>
 
